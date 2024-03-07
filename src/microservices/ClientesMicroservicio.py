@@ -1,4 +1,4 @@
-from Usuario import Usuario
+from src.Usuario import Usuario
 from src.Cliente import Cliente
 
 

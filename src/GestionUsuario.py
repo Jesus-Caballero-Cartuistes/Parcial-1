@@ -1,6 +1,6 @@
 from src.interfaces.Gestion import Gestion
 from src.microservices.ClientesMicroservicio import ClientesMicroservicio
-from Usuario import Usuario
+from src.Usuario import Usuario
 
 
 class GestionUsuario(Gestion):

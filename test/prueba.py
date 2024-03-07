@@ -2,9 +2,10 @@
 import unittest
 from unittest.mock import MagicMock
 
-from AutenticacionUsuario import AutenticacionUsuario, Usuario
+from src.AutenticacionUsuario import AutenticacionUsuario
 from src.GestionUsuario import GestionUsuario
 from src.RecomendacionProducto import RecomendacionProducto
+from src.Usuario import Usuario
 
 
 class Test(unittest.TestCase):

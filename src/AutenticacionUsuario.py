@@ -1,4 +1,4 @@
-from Usuario import Usuario
+from src.Usuario import Usuario
 from src.microservices.ClientesMicroservicio import ClientesMicroservicio
 from src.interfaces.Autenticacion import Autenticacion
 

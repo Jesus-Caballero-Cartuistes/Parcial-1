@@ -1,5 +1,5 @@
 from src.microservices.RecomendacionMicroservicio import RecomendacionMicroservicio
-from GestionUsuario import GestionUsuario
+from src.GestionUsuario import GestionUsuario
 
 
 class RecomendacionProducto:
