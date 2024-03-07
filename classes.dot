@@ -1,0 +1,28 @@
+digraph "classes" {
+rankdir=BT
+charset="utf-8"
+"Usuario.Admin" [color="black", fontcolor="black", label=<{Admin|rol<br ALIGN="LEFT"/>|}>, shape="record", style="solid"];
+"Autenticacion.Autenticacion" [color="black", fontcolor="black", label=<{Autenticacion|<br ALIGN="LEFT"/>|<I>iniciar_sesion</I>(usuario: Usuario)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"AutenticacionUsuario.AutenticacionUsuario" [color="black", fontcolor="black", label=<{AutenticacionUsuario|base_datos_usuarios<br ALIGN="LEFT"/>|<I>cerrar_sesion</I>(nombre_usuario)<br ALIGN="LEFT"/>iniciar_sesion(usuario: Usuario)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Usuario.Cliente" [color="black", fontcolor="black", label=<{Cliente|preferencias : list<br ALIGN="LEFT"/>|agregar_preferencia(preferencia)<br ALIGN="LEFT"/>eliminar_preferencia(preferencia)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Gestion.Gestion" [color="black", fontcolor="black", label=<{Gestion|<br ALIGN="LEFT"/>|<I>agregar</I>(item)<br ALIGN="LEFT"/><I>eliminar</I>(clave)<br ALIGN="LEFT"/><I>listar</I>()<br ALIGN="LEFT"/><I>obtener</I>(clave)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"GestionProducto.GestionProducto" [color="black", fontcolor="black", label=<{GestionProducto|microservicio_productos<br ALIGN="LEFT"/>|agregar(item)<br ALIGN="LEFT"/>eliminar(clave)<br ALIGN="LEFT"/>listar()<br ALIGN="LEFT"/>obtener(clave)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"GestionUsuario.GestionUsuario" [color="black", fontcolor="black", label=<{GestionUsuario|microservicio_usuarios<br ALIGN="LEFT"/>|agregar(usuario)<br ALIGN="LEFT"/>obtener(clave)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"main.Main" [color="black", fontcolor="black", label=<{Main|autenticacionUsuario<br ALIGN="LEFT"/>gestionProducto<br ALIGN="LEFT"/>gestionUsuario<br ALIGN="LEFT"/>recomendacionProducto<br ALIGN="LEFT"/>|iniciar_sesion()<br ALIGN="LEFT"/>mostrar_menu_principal()<br ALIGN="LEFT"/>mostrar_menu_secundario()<br ALIGN="LEFT"/>registrarse()<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Producto.Producto" [color="black", fontcolor="black", label=<{Producto|categoria : list<br ALIGN="LEFT"/>descripcion<br ALIGN="LEFT"/>nombre<br ALIGN="LEFT"/>precio<br ALIGN="LEFT"/>proveedor<br ALIGN="LEFT"/>|asignar_proveedor(proveedor)<br ALIGN="LEFT"/>mostrar_informacion()<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"ProductoMicroservicio.ProductoMicroservicio" [color="black", fontcolor="black", label=<{ProductoMicroservicio|productos : dict<br ALIGN="LEFT"/>|obtener_productos_por_categoria(categoria)<br ALIGN="LEFT"/>obtener_productos_por_tipo(tipo)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Proveedor.Proveedor" [color="black", fontcolor="black", label=<{Proveedor|nombre<br ALIGN="LEFT"/>|<I>obtener_productos</I>()<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Proveedor.ProveedorProgramasFidelizacion" [color="black", fontcolor="black", label=<{ProveedorProgramasFidelizacion|tipo_programa : str<br ALIGN="LEFT"/>|}>, shape="record", style="solid"];
+"Proveedor.ProveedorSeguros" [color="black", fontcolor="black", label=<{ProveedorSeguros|tipo_seguro : str<br ALIGN="LEFT"/>|}>, shape="record", style="solid"];
+"Proveedor.ProveedorTarjetasCredito" [color="black", fontcolor="black", label=<{ProveedorTarjetasCredito|tipo_tarjeta : str<br ALIGN="LEFT"/>|}>, shape="record", style="solid"];
+"RecomendacionMicroservicio.RecomendacionMicroservicio" [color="black", fontcolor="black", label=<{RecomendacionMicroservicio|producto_microservicio<br ALIGN="LEFT"/>|recomendar_productos_por_categorias(categorias)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"RecomendacionProducto.RecomendacionProducto" [color="black", fontcolor="black", label=<{RecomendacionProducto|gestion_usuario<br ALIGN="LEFT"/>recomendacion_microservicio<br ALIGN="LEFT"/>|obtener_recomendaciones_para_usuario(correo_usuario)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Usuario.Usuario" [color="black", fontcolor="black", label=<{Usuario|contrasena<br ALIGN="LEFT"/>correo<br ALIGN="LEFT"/>nombre<br ALIGN="LEFT"/>|}>, shape="record", style="solid"];
+"UsuariosMicroservicio.UsuariosMicroservicio" [color="black", fontcolor="black", label=<{UsuariosMicroservicio|usuarios : dict<br ALIGN="LEFT"/>|agregar_cliente(cliente)<br ALIGN="LEFT"/>obtener_cliente(correo)<br ALIGN="LEFT"/>verificar_credenciales(usuario)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Proveedor.ProveedorProgramasFidelizacion" -> "Proveedor.Proveedor" [arrowhead="empty", arrowtail="none"];
+"Proveedor.ProveedorSeguros" -> "Proveedor.Proveedor" [arrowhead="empty", arrowtail="none"];
+"Proveedor.ProveedorTarjetasCredito" -> "Proveedor.Proveedor" [arrowhead="empty", arrowtail="none"];
+"Usuario.Admin" -> "Usuario.Usuario" [arrowhead="empty", arrowtail="none"];
+"Usuario.Cliente" -> "Usuario.Usuario" [arrowhead="empty", arrowtail="none"];
+"AutenticacionUsuario.AutenticacionUsuario" -> "main.Main" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="autenticacionUsuario", style="solid"];
+}

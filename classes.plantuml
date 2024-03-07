@@ -1,0 +1,119 @@
+@startuml classes
+set namespaceSeparator none
+class "Admin" as Usuario.Admin {
+  rol
+}
+class "Autenticacion" as Autenticacion.Autenticacion {
+  {abstract}iniciar_sesion(usuario: Usuario)
+}
+class "AutenticacionUsuario" as AutenticacionUsuario.AutenticacionUsuario {
+  clientesMicroservicio
+  {abstract}cerrar_sesion(nombre_usuario)
+  iniciar_sesion(usuario: Usuario)
+}
+class "Cliente" as Usuario.Cliente {
+  preferencias : list
+  agregar_preferencia(preferencia)
+  eliminar_preferencia(preferencia)
+}
+class "ClientesMicroservicio" as ClientesMicroservicio.ClientesMicroservicio {
+  usuarios : dict
+  agregar_cliente(cliente)
+  obtener_cliente(correo)
+  verificar_credenciales(usuario)
+}
+class "Gestion" as Gestion.Gestion {
+  {abstract}agregar(item)
+  {abstract}eliminar(clave)
+  {abstract}listar()
+  {abstract}obtener(clave)
+}
+class "GestionProducto" as GestionProducto.GestionProducto {
+  microservicio_productos
+  producto
+  agregar(producto)
+  eliminar(clave)
+  listar()
+  obtener(clave)
+}
+class "GestionUsuario" as GestionUsuario.GestionUsuario {
+  microservicio_usuarios
+  usuario
+  agregar(usuario)
+  eliminar(clave)
+  listar()
+  obtener(clave)
+}
+class "Main" as main.Main {
+  autenticacionUsuario
+  gestionProducto
+  gestionUsuario
+  recomendacionProducto
+  iniciar_sesion()
+  mostrar_menu_principal()
+  mostrar_menu_secundario(usuario: Usuario)
+  registrarse()
+}
+class "Producto" as Producto.Producto {
+  categoria : list
+  descripcion
+  nombre
+  precio
+  proveedor
+  asignar_proveedor(proveedor)
+  mostrar_informacion()
+}
+class "ProductoMicroservicio" as ProductoMicroservicio.ProductoMicroservicio {
+  productos : dict
+  obtener_productos_por_categoria(categoria)
+  obtener_productos_por_tipo(tipo)
+}
+class "Proveedor" as Proveedor.Proveedor {
+  nombre
+  {abstract}obtener_productos()
+}
+class "ProveedorProgramasFidelizacion" as Proveedor.ProveedorProgramasFidelizacion {
+  tipo_programa : str
+}
+class "ProveedorSeguros" as Proveedor.ProveedorSeguros {
+  tipo_seguro : str
+}
+class "ProveedorTarjetasCredito" as Proveedor.ProveedorTarjetasCredito {
+  tipo_tarjeta : str
+}
+class "RecomendacionMicroservicio" as RecomendacionMicroservicio.RecomendacionMicroservicio {
+  producto_microservicio
+  recomendar_productos_por_categorias(preferencias)
+}
+class "RecomendacionProducto" as RecomendacionProducto.RecomendacionProducto {
+  gestion_usuario
+  recomendacion_microservicio
+  obtener_recomendaciones_para_usuario(correo_usuario)
+}
+class "Usuario" as Usuario.Usuario {
+  contrasena
+  correo
+  nombre
+}
+AutenticacionUsuario.AutenticacionUsuario --|> Autenticacion.Autenticacion
+GestionProducto.GestionProducto --|> Gestion.Gestion
+GestionUsuario.GestionUsuario --|> Gestion.Gestion
+Proveedor.ProveedorProgramasFidelizacion --|> Proveedor.Proveedor
+Proveedor.ProveedorSeguros --|> Proveedor.Proveedor
+Proveedor.ProveedorTarjetasCredito --|> Proveedor.Proveedor
+Usuario.Admin --|> Usuario.Usuario
+Usuario.Cliente --|> Usuario.Usuario
+AutenticacionUsuario.AutenticacionUsuario --* main.Main : autenticacionUsuario
+ClientesMicroservicio.ClientesMicroservicio --* AutenticacionUsuario.AutenticacionUsuario : clientesMicroservicio
+ClientesMicroservicio.ClientesMicroservicio --* GestionUsuario.GestionUsuario : microservicio_usuarios
+GestionProducto.GestionProducto --* main.Main : gestionProducto
+GestionUsuario.GestionUsuario --* RecomendacionProducto.RecomendacionProducto : gestion_usuario
+GestionUsuario.GestionUsuario --* main.Main : gestionUsuario
+Producto.Producto --* GestionProducto.GestionProducto : producto
+ProductoMicroservicio.ProductoMicroservicio --* GestionProducto.GestionProducto : microservicio_productos
+ProductoMicroservicio.ProductoMicroservicio --* RecomendacionMicroservicio.RecomendacionMicroservicio : producto_microservicio
+RecomendacionMicroservicio.RecomendacionMicroservicio --* RecomendacionProducto.RecomendacionProducto : recomendacion_microservicio
+RecomendacionProducto.RecomendacionProducto --* main.Main : recomendacionProducto
+Usuario.Usuario --* GestionUsuario.GestionUsuario : usuario
+Proveedor.Proveedor --o Producto.Producto : proveedor
+@enduml
